@@ -8,7 +8,8 @@ const useStyles = makeStyles({
         alignSelf: 'center',
         justifyContent: 'space-between',
         padding: 10,
-        fontSize: 20
+        fontSize: 20,
+        alignItems: 'center'
     },
 
     content: {

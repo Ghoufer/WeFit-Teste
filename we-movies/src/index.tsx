@@ -8,7 +8,9 @@ import AppRoutes from 'routes';
 const Wrapper = styled('div')({
   display: 'flex',
   alignItems: 'center',
-  flexDirection: 'column'
+  flexDirection: 'column',
+  width: '100%',
+  height: '100%'
 });
 
 const root = ReactDOM.createRoot(
