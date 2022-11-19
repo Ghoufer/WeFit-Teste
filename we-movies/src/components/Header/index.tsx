@@ -1,4 +1,4 @@
-import { Typography, Button } from '@mui/material';
+import { Button } from '@mui/material';
 
 import useStyles from './styles';
 import CartIcon from 'icons/CartIcon';
@@ -9,12 +9,9 @@ const Header = (): JSX.Element => {
 
     return (
         <div className={classes.root}>
-            <Typography 
-                variant='h5'
-                sx={{ fontWeight: 'bold' }} 
-            >
-                    WeMovies
-            </Typography>
+            <span style={{ fontWeight: 'bold' }} >
+                WeMovies
+            </span>
 
             <Button 
                 disableRipple 
@@ -28,9 +25,9 @@ const Header = (): JSX.Element => {
                     color: '#FFf'
                 }}
             >
-                <div>
-                    <Typography className={classes.text}>Meu carrinho</Typography>
-                    <Typography className={classes.subText}>0 itens</Typography>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                    <span className={classes.text}>Meu carrinho</span>
+                    <span className={classes.subText}>0 itens</span>
                 </div>
             </Button>
         </div>

@@ -28,7 +28,8 @@ const useStyles = makeStyles({
     subText: {
         fontSize: 12,
         color: '#999999',
-        fontWeight: 600
+        fontWeight: 600,
+        marginTop: -5
     }
 })
 
