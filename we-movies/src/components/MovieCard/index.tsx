@@ -1,14 +1,23 @@
 import { useState } from 'react';
 import { Button } from '@mui/material';
+import { useSelector, useDispatch } from "react-redux";
 
 import useStyles from "./styles";
-import AddItemIcon from 'icons/AddItemIcon';
 import { Product } from 'helpers/types';
-
+import AddItemIcon from 'icons/AddItemIcon';
+import { addItem } from 'redux/actions/cartActions';
 
 const MovieCard = ({id, image, title, price}: Product): JSX.Element => {
     
     const classes = useStyles()
+    const dispatch = useDispatch()
+    const cartState = useSelector((state) => state)
+
+    console.log(cartState)
+
+    const handleAddItem = () => {
+        dispatch(addItem(id))
+    }
 
     return (
         <div key={id} className={classes.root}>
@@ -27,6 +36,7 @@ const MovieCard = ({id, image, title, price}: Product): JSX.Element => {
             <Button 
                 color='primary'
                 variant='contained'
+                onClick={() => handleAddItem()}
             >
                 <AddItemIcon />
 

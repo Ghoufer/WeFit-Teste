@@ -24,12 +24,12 @@ const Home = (): JSX.Element => {
         .finally(() => setLoading(false))
     }, [])
 
-    console.log(products)
-
     return (
         <>
             {loading ? (
-                <CircularProgress sx={{ color: '#FFF' }} size={64} />
+                <div className={classes.loading}>
+                    <CircularProgress sx={{ color: '#FFF' }} size={64} />
+                </div>
             ) : (
                 <div className={classes.root}>
                     {products ? (
@@ -49,7 +49,9 @@ const Home = (): JSX.Element => {
                         </>
                         // products.map((product))
                     ) : (
-                        <span>Nenhum produto encontrado</span>
+                        <div className={classes.loading}>
+                            <span style={{ fontSize: 18 }}>Nenhum produto encontrado</span>
+                        </div>
                     )}
                 </div>
             )}

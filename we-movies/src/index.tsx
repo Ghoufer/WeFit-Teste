@@ -2,8 +2,10 @@ import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { styled } from '@mui/system';
+import { Provider } from 'react-redux';
 
 import AppRoutes from 'routes';
+import store from 'redux/store';
 
 const Wrapper = styled('div')({
   display: 'flex',
@@ -19,8 +21,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Wrapper>
-      <AppRoutes />
-    </Wrapper>
+    <Provider store={store}>
+      <Wrapper>
+        <AppRoutes />
+      </Wrapper>
+    </Provider>
   </React.StrictMode>
 );
