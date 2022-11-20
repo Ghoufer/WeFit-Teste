@@ -1,52 +1,56 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { CircularProgress } from '@mui/material';
 
 import useStyles from './styles';
-import useAxios from 'helpers/useAxios';
 import MovieCard from 'components/MovieCard';
+import fetchData from 'helpers/fetchData';
+import { Product } from 'helpers/types';
 
 const Home = (): JSX.Element => {
 
     const classes = useStyles()
 
-    const [products, setProducts] = useState(null)
-    const [result, isError, isLoading] = useAxios({ url: '/products', method: 'GET' })
+    const [loading, setLoading] = useState(false)
+    const [products, setProducts] = useState<Product[] | null>(null)
 
     useEffect(() => {
-        if(result) console.log(result)
-    }, [result])
+
+        setLoading(true)
+
+        fetchData('products')
+        .then((result) => {
+            setProducts(result as Product[])
+        })
+        .finally(() => setLoading(false))
+    }, [])
+
+    console.log(products)
 
     return (
         <>
-            {isLoading ? (
+            {loading ? (
                 <CircularProgress sx={{ color: '#FFF' }} size={64} />
             ) : (
                 <div className={classes.root}>
-                    <MovieCard 
-                        title={'God of War Ragnarock'} 
-                        price={'R$300,00'} 
-                        imgUrl={'https://m.media-amazon.com/images/I/81UzPcO7PiL._AC_SX466_.jpg'} 
-                    />
-                    <MovieCard 
-                        title={'God of War Ragnarock'} 
-                        price={'R$300,00'} 
-                        imgUrl={'https://m.media-amazon.com/images/I/81UzPcO7PiL._AC_SX466_.jpg'} 
-                    />
-                    <MovieCard 
-                        title={'God of War Ragnarock'} 
-                        price={'R$300,00'} 
-                        imgUrl={'https://m.media-amazon.com/images/I/81UzPcO7PiL._AC_SX466_.jpg'} 
-                    />
-                    <MovieCard 
-                        title={'God of War Ragnarock'} 
-                        price={'R$300,00'} 
-                        imgUrl={'https://m.media-amazon.com/images/I/81UzPcO7PiL._AC_SX466_.jpg'} 
-                    />
-                    <MovieCard 
-                        title={'God of War Ragnarock'} 
-                        price={'R$300,00'} 
-                        imgUrl={'https://m.media-amazon.com/images/I/81UzPcO7PiL._AC_SX466_.jpg'} 
-                    />
+                    {products ? (
+                        <>
+                            {products.map((product) => {
+                                return (
+                                    <React.Fragment key={product.id}>
+                                        <MovieCard 
+                                            id={product.id}
+                                            title={product.title}
+                                            price={product.price}
+                                            image={product.image}
+                                        />
+                                    </React.Fragment>
+                                )
+                            })}
+                        </>
+                        // products.map((product))
+                    ) : (
+                        <span>Nenhum produto encontrado</span>
+                    )}
                 </div>
             )}
         </>

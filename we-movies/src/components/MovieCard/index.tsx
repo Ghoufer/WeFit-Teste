@@ -3,28 +3,26 @@ import { Button } from '@mui/material';
 
 import useStyles from "./styles";
 import AddItemIcon from 'icons/AddItemIcon';
+import { Product } from 'helpers/types';
 
-type Props = {
-    imgUrl: string,
-    title: string,
-    price: string
-}
 
-const MovieCard = ({imgUrl, title, price}: Props): JSX.Element => {
+const MovieCard = ({id, image, title, price}: Product): JSX.Element => {
     
     const classes = useStyles()
 
     return (
-        <div className={classes.root}>
+        <div key={id} className={classes.root}>
             <img 
                 alt={title}
-                src={imgUrl}
+                src={image}
                 className={classes.img}
             />
 
             <span className={classes.title}>{title}</span>
 
-            <span className={classes.price}>{price}</span>
+            <span className={classes.price}>
+                {price.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}
+            </span>
 
             <Button 
                 color='primary'

@@ -3,11 +3,12 @@ import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles({
     root: {
         display: 'inline-flex',
-        width: '70%',
+        width: '50%',
         gap: 16,
         flexWrap: 'wrap',
         justifyContent: 'center',
-        marginTop: 24
+        marginTop: 24,
+        color: '#FFF'
     },
 
     loading: {
