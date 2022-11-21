@@ -1,6 +1,6 @@
 ## Executar
 
-Primeiro é preciso baixar as dependências do projeto. O `npm` sem parâmetros faz isso para nós.
+Primeiro é preciso baixar as dependências do projeto. O `npm install` sem parâmetros faz isso para nós.
 
 ```shell
 npm install
