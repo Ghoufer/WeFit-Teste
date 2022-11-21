@@ -31,6 +31,13 @@ const useStyles = makeStyles({
         color: '#999999',
         fontWeight: 600,
         marginTop: -5
+    },
+
+    homeBtn: {
+        fontWeight: 'bold',
+        "&:hover": {
+            cursor: 'pointer'
+        }
     }
 })
 

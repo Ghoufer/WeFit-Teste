@@ -1,18 +1,30 @@
-import store from 'redux/store';
-import { ADD_ITEM, DELETE_ITEM } from "../actionTypes";
+import { ADD_ITEM, REMOVE_ITEM, DELETE_ITEM, DELETE_ALL } from "../actionTypes";
 
-const addItem = (itemId) => {
+const addItem = (newItem) => {
     return {
         type: ADD_ITEM,
-        itemId: itemId
+        newItem
     }
-};
+}
+
+const removeItem = (itemId) => {
+    return {
+        type: REMOVE_ITEM,
+        itemId
+    }
+}
 
 const deleteItem = (itemId) => {
     return {
         type: DELETE_ITEM,
         itemId
     }
-};
+}
 
-export { addItem, deleteItem };
+const deleteAll = () => {
+    return {
+        type: DELETE_ALL,
+    }
+}
+
+export { addItem, deleteItem, removeItem, deleteAll };

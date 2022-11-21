@@ -1,33 +1,38 @@
-import { ADD_ITEM, DELETE_ITEM } from "../actionTypes";
+import { Product } from "helpers/types";
+import { ADD_ITEM, DELETE_ITEM, REMOVE_ITEM, DELETE_ALL } from "../actionTypes";
 
 type Item = {
-  productId: string,
+  info: Product,
   numberOfItems: number
 }
 
 const initialState: Item[] = []
 
 const cartReducer = (state = initialState, action: any) => {
-  // console.log(action.payload)
   switch (action.type) {
     case ADD_ITEM:
-      console.log(action.itemId)
-      const found = state.find(item => item.productId === action.itemID)
+
+      const found = state.find(item => item.info.id === action.newItem.id)
 
       if(!found) {
-        state.push({
-          productId: action.itemId,
-          numberOfItems: 1
+        return [
+          ...state,
+          {
+            info: action.newItem,
+            numberOfItems: 1
+          }
+        ]
+      } 
+      else {
+        return state.map((product) => {
+          return product.info.id === action.newItem.id
+                  ? { ...product, numberOfItems: product.numberOfItems + 1 } : product
         })
-      } else {
-        console.log(found)
       }
 
-      return state
-
-    case DELETE_ITEM:
+    case REMOVE_ITEM:
       return state.map(product => {
-        if (product.productId === action.payload.id) {
+        if (product.info.id === action.itemId) {
           return {
             ...product, 
             numberOfItems: product.numberOfItems - 1
@@ -35,6 +40,12 @@ const cartReducer = (state = initialState, action: any) => {
         };
         return product;
       })
+    
+    case DELETE_ITEM:
+      return state.filter((product) => product.info.id !== action.itemId)
+    
+    case DELETE_ALL:
+      return initialState
 
     default:
       return state;
